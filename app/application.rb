@@ -9,8 +9,9 @@ class Application
     if req.path.match("/items")
       # item name
       item_name = req.path.split("/items/").last # turns /items/#item into #item
+      item = @@items.find { |i| i.name == item_name }
 
-      if item =@@items.find { |i| i.name == item_name }
+      if @@items.include?(item)
         resp.write item.price
       else
         resp.write "Item not found"
